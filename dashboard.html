@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+<section>
+<h2>Bookings Dashboard</h2>
+
+<form method="GET" class="filter-bar">
+    <input type="text" name="search" placeholder="Search by name or phone" value="{{ search_query or '' }}">
+    <select name="status">
+        <option value="">All</option>
+        <option value="Pending" {% if status_filter=='Pending' %}selected{% endif %}>Pending</option>
+        <option value="Completed" {% if status_filter=='Completed' %}selected{% endif %}>Completed</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<a href="{{ url_for('admin_trash') }}" class="btn-secondary">View Trash</a>
+
+<table>
+<thead>
+<tr>
+    <th>ID</th><th>Customer</th><th>Service</th><th>Issue</th><th>Urgency</th>
+    <th>Phone</th><th>Address</th><th>Date</th><th>Created At</th><th>Status</th><th>Actions</th><th>Photo</th>
+</tr>
+</thead>
+<tbody>
+{% for b in bookings %}
+<tr>
+    <td>{{ b['id'] }}</td>
+    <td>{{ b['fullName'] }}</td>
+    <td>{{ b['serviceType'] }}</td>
+    <td>{{ b['issueType'] }}</td>
+    <td>{{ b['urgency'] }}</td>
+    <td>{{ b['phone'] }}</td>
+    <td>{{ b['address'] }}</td>
+    <td>{{ b['date'] }}</td>
+    <td>{{ b['created_at'] }}</td>
+    <td>
+        <span class="status {{ b['status']|lower }}">{{ b['status'] }}</span>
+    </td>
+    <td>
+        <a href="{{ url_for('toggle_status', booking_id=b['id']) }}" class="btn-complete">
+            {% if b['status']=='Pending' %} Completed{% else %}Pending{% endif %}
+        <p></p>
+        </a>
+        <a href="{{ url_for('delete_booking', booking_id=b['id']) }}" class="btn-delete">Trash</a>
+    </td>
+    <td>
+    {% if b['photo'] %}
+        <a href="{{ url_for('static', filename='uploads/' + b['photo']) }}" target="_blank">
+            <img src="{{ url_for('static', filename='uploads/' + b['photo']) }}">
+                 width="80"
+                 class="clickable-img">
+        </a>
+    {% else %}
+        No Photo
+    {% endif %}
+</td>
+    
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<a href="{{ url_for('admin_logout') }}" class="btn-secondary">Logout</a>
+</section>
+</body>
+</html>
