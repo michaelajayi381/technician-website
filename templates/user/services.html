@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeCore Technical Services - Our Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+
+<section id="services">
+    <h1>Our Professional Services</h1>
+    <p class="services-intro">
+        At PrimeCore Technical Services, we provide reliable and high-quality technical solutions 
+        across electrical, mechanical, installations, preventive maintenance, and electronics & solar repairs.
+        Click any service below to book instantly.
+    </p>
+
+    <div class="service-cards">
+        <div class="service-card" onclick="window.location='{{ url_for('booking') }}?service=Electrical'">
+            <h3>Electrical Repairs</h3>
+            <p>Wiring, sockets, switches, circuit troubleshooting, generators, and power systems.</p>
+        </div>
+
+        <div class="service-card" onclick="window.location='{{ url_for('booking') }}?service=Mechanical'">
+            <h3>Mechanical Repairs</h3>
+            <p>Engines, generators, machines, belts, gears, hydraulic & pneumatic system repairs.</p>
+        </div>
+
+        <div class="service-card" onclick="window.location='{{ url_for('booking') }}?service=Installation'">
+            <h3>Installations</h3>
+            <p>Equipment setup, AC, solar systems, inverters, CCTV, and industrial machine installations.</p>
+        </div>
+
+        <div class="service-card" onclick="window.location='{{ url_for('booking') }}?service=Maintenance'">
+            <h3>Preventive Maintenance</h3>
+            <p>Regular servicing, inspections, lubrication, safety checks, and emergency support.</p>
+        </div>
+
+        <div class="service-card" onclick="window.location='{{ url_for('booking') }}?service=Electronics'">
+            <h3>Electronics & Solar Repairs</h3>
+            <p>Gadgets, inverters, solar panels, consumer electronics, PCB troubleshooting, and component replacement.</p>
+        </div>
+    </div>
+
+    <div class="back-home">
+        <a href="{{ url_for('index') }}" class="btn-secondary">Back to Home</a>
+    </div>
+</section>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/2349123671982" class="whatsapp-float" target="_blank">💬</a>
+
+</body>
+</html>
