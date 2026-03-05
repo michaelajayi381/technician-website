@@ -127,7 +127,7 @@ def admin_login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if username == 'admin' and password == 'password':
+        if username == 'adminprime' and password == 'Michael$123,':
             session['admin_logged_in'] = True
             return redirect(url_for('admin_dashboard'))
         else:
